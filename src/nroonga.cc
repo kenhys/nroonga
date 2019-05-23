@@ -77,6 +77,9 @@ void Database::New(const Nan::FunctionCallbackInfo<v8::Value>& info) {
   db->closed = true;
   grn_ctx *ctx = &db->context;
   grn_ctx_init(ctx, 0);
+  grn_default_logger_set_max_level(GRN_LOG_DEBUG);
+  grn_default_query_logger_set_path("query.log");
+  grn_default_logger_set_path("groonga.log");
   if (info[0]->IsUndefined()) {
     db->database = grn_db_create(ctx, NULL, NULL);
   } else if (info[0]->IsString()) {
@@ -95,9 +98,6 @@ void Database::New(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     return;
   }
 
-  grn_default_logger_set_max_level(GRN_LOG_DEBUG);
-  grn_default_query_logger_set_path("query.log");
-  grn_default_logger_set_path("groonga.log");
   db->closed = false;
   db->Wrap(info.Holder());
   info.GetReturnValue().Set(info.This());
