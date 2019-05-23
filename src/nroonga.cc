@@ -95,6 +95,8 @@ void Database::New(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     return;
   }
 
+  grn_default_query_logger_set_path("query.log");
+  grn_default_logger_set_path("groonga.log");
   db->closed = false;
   db->Wrap(info.Holder());
   info.GetReturnValue().Set(info.This());
