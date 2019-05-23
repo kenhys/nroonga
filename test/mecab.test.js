@@ -64,6 +64,11 @@ describe('TokenMecab', () => {
   })
 
   describe('#commandSync', () => {
+    it('should TokenMecab registered', () => {
+      const matched = db.commandSync('plugin_register tokenizers/mecab')
+      expect(matched).to.equal(true)
+    })
+
     it('should tokenize tokyo to', () => {
       const matched = db.commandSync('tokenize TokenMecab "東京都"')
       const expected = [{
