@@ -44,6 +44,7 @@ test_script:
   # reset PATH
   - set GROONGA_PATH=
 #  - xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\Release\\nroonga_bindings.node\
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - npm test
 
 on_failure:
