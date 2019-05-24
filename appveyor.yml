@@ -53,7 +53,7 @@ test_script:
   - npm --version
   # reset PATH and copy binary files
   - set
-  - if %Configuration% == "DISABLE_GROONGA_PATH" (
+  - if "%Configuration%" == "DISABLE_GROONGA_PATH" (
       set GROONGA_PATH= &&
       xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\ &&
       xcopy /E /I /Y build\bin\* build\Release\
