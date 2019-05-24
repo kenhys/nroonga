@@ -4,12 +4,18 @@ notifications:
 
 image: Visual Studio 2017
 
+configuration:
+  - ENABLE_GROONGA_PATH
+  - DISABLE_GROONGA_PATH
+
 environment:
   matrix:
     - nodejs_version: '11' # 12 is not ready on AppVeyor
     - nodejs_version: '10'
     - nodejs_version: '8'
     - nodejs_version: '6'
+  allow_failures:
+    - configuration: groonga_under_build_folder
 
 platform:
   - x64
@@ -44,9 +50,11 @@ test_script:
   - node --version
   - npm --version
   # reset PATH and copy binary files
-  - set GROONGA_PATH=
-  - xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\
-  - xcopy /E /I /Y build\bin\* build\Release\
+  - if %CONFIGURATION% == "DISABLE_GROONGA_PATH" (
+      set GROONGA_PATH= &&
+      xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\ &&
+      xcopy /E /I /Y build\bin\* build\Release\
+    )
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - npm test
 
