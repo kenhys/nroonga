@@ -5,7 +5,7 @@ notifications:
 image: Visual Studio 2017
 
 configuration:
-  - ENABLE_GROONGA_PATH
+#  - ENABLE_GROONGA_PATH
   - DISABLE_GROONGA_PATH
 
 environment:
