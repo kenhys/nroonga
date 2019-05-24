@@ -14,8 +14,10 @@ environment:
     - nodejs_version: '10'
     - nodejs_version: '8'
     - nodejs_version: '6'
+
+matrix:
   allow_failures:
-    - configuration: groonga_under_build_folder
+    - configuration: DISABLE_GROONGA_PATH
 
 platform:
   - x64
