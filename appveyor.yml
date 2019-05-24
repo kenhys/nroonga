@@ -33,7 +33,7 @@ install:
   # Use master to test fixed GRN_DLL_FILENAME issue
   - set ARCHIVE=groonga-9.0.3-bf18c17-%Platform%.zip
   # Failure
-  - set ARCHIVE=groonga-9.0.3-c8f06d0-%Platform%.zip
+  #- set ARCHIVE=groonga-9.0.3-c8f06d0-%Platform%.zip
   - curl -O https://packages.groonga.org/tmp/%ARCHIVE%
   - 7z x %ARCHIVE%
   - del %ARCHIVE%
