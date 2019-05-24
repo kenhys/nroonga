@@ -28,8 +28,8 @@ install:
   # setup groonga archive at c:/projects/groonga
   - choco install -y curl 7zip.commandline
   - cd %APPVEYOR_BUILD_FOLDER%/..
-  - set ARCHIVE=groonga-latest-%PLATFORM%-vs2017.zip
-  - curl -O https://packages.groonga.org/windows/groonga/%ARCHIVE%
+  #- set ARCHIVE=groonga-latest-%PLATFORM%-vs2017.zip
+  #- curl -O https://packages.groonga.org/windows/groonga/%ARCHIVE%
   # Use master to test fixed GRN_DLL_FILENAME issue
   - set ARCHIVE=groonga-9.0.3-bf18c17-%Platform%.zip
   - curl -O https://packages.groonga.org/tmp/%ARCHIVE%
