@@ -15,12 +15,24 @@ platform:
   - x64
   - x86
 
+configuration:
+  - ENABLE_GROONGA_PATH
+  - DISABLE_GROONGA_PATH
+
+# Remove when \\?\ extended path prefix bug is fixed in Groonga
+matrix:
+  allow_failures:
+    - configuration: DISABLE_GROONGA_PATH
+
 install:
   # setup groonga archive at c:/projects/groonga
   - choco install -y curl 7zip.commandline
   - cd %APPVEYOR_BUILD_FOLDER%/..
   - set ARCHIVE=groonga-latest-%PLATFORM%-vs2017.zip
   - curl -O https://packages.groonga.org/windows/groonga/%ARCHIVE%
+  # Use master to test fixed GRN_DLL_FILENAME issue
+  - set ARCHIVE=groonga-9.0.3-bf18c17-%Platform%.zip
+  - curl -O https://packages.groonga.org/tmp/%ARCHIVE%
   - 7z x %ARCHIVE%
   - del %ARCHIVE%
   - move groonga-* groonga
@@ -41,6 +53,12 @@ build: off
 test_script:
   - node --version
   - npm --version
+  # Reproduce extended path prefix \\?\ test case when GROONGA_PATH is disabled.
+  - if "%Configuration%" == "DISABLE_GROONGA_PATH" (
+      set GROONGA_PATH= &&
+      xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\ &&
+      xcopy /E /I /Y build\bin\* build\Release\
+    )
   - npm test
 
 #on_failure:
