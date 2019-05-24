@@ -11,9 +11,9 @@ configuration:
 environment:
   matrix:
     - nodejs_version: '11' # 12 is not ready on AppVeyor
-    - nodejs_version: '10'
-    - nodejs_version: '8'
-    - nodejs_version: '6'
+#    - nodejs_version: '10'
+#    - nodejs_version: '8'
+#    - nodejs_version: '6'
 
 matrix:
   allow_failures:
@@ -21,7 +21,7 @@ matrix:
 
 platform:
   - x64
-  - x86
+#  - x86
 
 install:
   # setup groonga archive at c:/projects/groonga
