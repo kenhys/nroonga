@@ -58,7 +58,7 @@ test_script:
   # Reproduce extended path prefix \\?\ test case when GROONGA_PATH is disabled.
   - if "%Configuration%" == "DISABLE_GROONGA_PATH" (
       set GROONGA_PATH= &&
-      xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\ &&
+      xcopy /E /I /Y %APPVEYOR_BUILD_FOLDER%\..\groonga\* build\Release\ &&
       xcopy /E /I /Y build\bin\* build\Release\
     )
   - npm test
