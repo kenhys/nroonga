@@ -24,6 +24,14 @@ describe('plugin', () => {
     fs.removeSync(tempdir)
   })
 
+  describe('Normalizer MySQL', () => {
+    it('should normalize haha', () => {
+      const matched = db.commandSync('normalize NormalizerMySQLUnicode900 "はハ"')
+      const expected = { 'normalized': 'はは', 'types': [], 'checks': [] }
+      expect(matched).to.deep.equal(expected)
+    })
+  })
+
   describe('TokenMecab', () => {
     it('should tokenize tokyo to', () => {
       const matched = db.commandSync('tokenize TokenMecab "東京都"')
@@ -39,14 +47,6 @@ describe('plugin', () => {
         force_prefix: false,
         force_prefix_search: false
       }]
-      expect(matched).to.deep.equal(expected)
-    })
-  })
-
-  describe('Normalizer MySQL', () => {
-    it('should normalize haha', () => {
-      const matched = db.commandSync('normalize NormalizerMySQLUnicode900 "はハ"')
-      const expected = { 'normalized': 'はは', 'types': [], 'checks': [] }
       expect(matched).to.deep.equal(expected)
     })
   })
