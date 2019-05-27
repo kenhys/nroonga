@@ -30,8 +30,8 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%/..
   #- set ARCHIVE=groonga-latest-%PLATFORM%-vs2017.zip
   #- curl -O https://packages.groonga.org/windows/groonga/%ARCHIVE%
-  # Failure when GROONGA_PATH is disabled
-  - set ARCHIVE=groonga-9.0.3-c8f06d0-%Platform%.zip
+  # Fails when GROONGA_PATH is disabled
+  - set ARCHIVE=groonga-9.0.3-b5515b7-%Platform%.zip
   # Use master to test fixed GRN_DLL_FILENAME issue
   #- set ARCHIVE=groonga-9.0.3-65dc3cd-%Platform%.zip
   - curl -O https://packages.groonga.org/tmp/%ARCHIVE%
