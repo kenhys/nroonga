@@ -17,6 +17,7 @@ describe('plugin', () => {
     db = new nroonga.Database(path.join(tempdir, databaseName))
     db.commandSync('plugin_register normalizers/mysql')
     db.commandSync('plugin_register ruby/eval')
+    db.commandSync('plugin_register tokenizers/mecab')
   })
 
   afterEach(() => {
@@ -36,6 +37,25 @@ describe('plugin', () => {
     it('should evaluate ruby script', () => {
       const matched = db.commandSync('ruby_eval "1 + 2"')
       const expected = { 'value': 3 }
+      expect(matched).to.deep.equal(expected)
+    })
+  })
+
+  describe('Tokenizer MeCab', () => {
+    it('should tokenize tokyo to', () => {
+      const matched = db.commandSync('tokenize TokenMecab "東京都"')
+      const expected = [{
+        value: '東京',
+        position: 0,
+        force_prefix: false,
+        force_prefix_search: false
+      },
+      {
+        value: '都',
+        position: 1,
+        force_prefix: false,
+        force_prefix_search: false
+      }]
       expect(matched).to.deep.equal(expected)
     })
   })
